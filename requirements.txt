@@ -1,0 +1,7 @@
+gensim
+numpy
+plotly
+nltk
+matplotlib
+networkx
+pygraphviz
