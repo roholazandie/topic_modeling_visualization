@@ -1,30 +1,27 @@
-from gensim import models
-
+from gensim.models import TfidfModel, LsiModel
 from data.corpus import CorpusManager
 from visualization import topic_modeling_semantic_network as topic_modeling_semantic_network
+from configs import LSIConfig
 
-file_name = '/home/rohola/Codes/Python/topic_modeling_visualization/dataset/sample_texts/bbc_news_corpus.txt'
-out_file_name = 'ssa'#
-num_topics = 10#
-num_topics_to_show = 5
-num_words = 10
-power_iters = 5 #controls the accuracy of the algorithm
+config_file = "/home/rohola/Codes/Python/topic_modeling_visualization/configs/lsi_config.json"
+config = LSIConfig.from_json_file(config_file)
+
 
 corpus_manager = CorpusManager()
-corpus, dictionary = corpus_manager.read_corpus(file_name)
+corpus, dictionary = corpus_manager.read_corpus(config.dataset_dir)
 
-tfidf = models.TfidfModel(corpus)
+tfidf = TfidfModel(corpus)
 corpus_tfidf = tfidf[corpus]
 
-lsi = models.LsiModel(corpus_tfidf, id2word=dictionary, num_topics=num_topics, power_iters=power_iters) # initialize an LSI transformation
+lsi = LsiModel(corpus_tfidf, id2word=dictionary, num_topics=config.num_topics, power_iters=config.power_iters) # initialize an LSI transformation
 
-topics = []
-for topic in lsi.print_topics(num_topics=num_topics_to_show, num_words=num_words):
-    topics.append([((item.split('*')[1]).strip(' "'), float(item.split('*')[0])) for item in topic[1].split('+')])
 
-topic_modeling_semantic_network.visualize_semantic_netwrok(topics,
+topic_words = lsi.show_topics(config.num_topics_to_show, num_words=config.num_words, formatted=False)
+topic_words = [j for (i, j) in topic_words]
+
+topic_modeling_semantic_network.visualize_semantic_netwrok(config,
+                                                           topic_words,
                                                            visualize_method='plotly',
-                                                           filename=out_file_name,
+                                                           filename=config.out_file_name,
                                                            title='Latent Semantic Indexing')
 
-print('done')

@@ -5,7 +5,7 @@ from networkx.drawing.nx_agraph import graphviz_layout
 import plotly.graph_objs as go
 
 
-def visualize(G, node_size, weights, filename="netwrokx", title=""):
+def visualize(config, G, node_size, weights, filename="netwrokx", title=""):
     keys = G.nodes()
     values = range(len(G.nodes()))
     dictionary = dict(zip(keys, values))
@@ -19,7 +19,7 @@ def visualize(G, node_size, weights, filename="netwrokx", title=""):
     edge_trace = go.Scatter(
         x=[],
         y=[],
-        # line=Line(width=[], color='rgba(136, 136, 136, .8)'),
+        line=dict(width=0.8, color='rgba(136, 136, 136, .9)'),
         hoverinfo='none',
         mode='lines')
 
@@ -38,7 +38,7 @@ def visualize(G, node_size, weights, filename="netwrokx", title=""):
         y=[],
         text=[],
         mode='markers+text',
-        textfont=dict(family='Calibri (Body)', size=25, color='black'),
+        textfont=dict(family='Calibri (Body)', size=23, color='black'),
         opacity=1,
         # hoverinfo='text',
         marker=go.scatter.Marker(
@@ -46,7 +46,7 @@ def visualize(G, node_size, weights, filename="netwrokx", title=""):
             # colorscale options
             # 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' |
             # Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'
-            colorscale='Hot',
+            colorscale=config.color_scale,
             reversescale=True,
             color=[],
             size=[],
