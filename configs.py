@@ -6,6 +6,8 @@ class LDAConfig:
     def __init__(self,
                  dataset_dir="",
                  out_file_name="",
+                 title="",
+                 dimension="",
                  num_topics="",
                  num_topics_to_show="",
                  num_words="",
@@ -15,6 +17,8 @@ class LDAConfig:
                  color_scale=""):
         self.dataset_dir = dataset_dir
         self.out_file_name = out_file_name
+        self.title = title
+        self.dimension = dimension
         self.num_topics = num_topics
         self.num_topics_to_show = num_topics_to_show
         self.num_words = num_words
@@ -44,6 +48,8 @@ class LSIConfig:
     def __init__(self,
                  dataset_dir="",
                  out_file_name="",
+                 title="",
+                 dimension="",
                  num_topics="",
                  num_topics_to_show="",
                  num_words="",
@@ -53,6 +59,8 @@ class LSIConfig:
                  power_iter=""):
         self.dataset_dir = dataset_dir
         self.out_file_name = out_file_name
+        self.title = title
+        self.dimension = dimension
         self.num_topics = num_topics
         self.num_topics_to_show = num_topics_to_show
         self.num_words = num_words

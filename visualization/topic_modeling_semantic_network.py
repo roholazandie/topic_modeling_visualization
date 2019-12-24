@@ -5,7 +5,7 @@ from networkx.drawing.nx_agraph import graphviz_layout
 from visualization import plotly_visualize as plotly
 
 
-def visualize_semantic_netwrok(config, topics, visualize_method="networkx", filename="networkx", title=""):
+def visualize_semantic_netwrok(config, topics, visualize_method='plotly'):
     graph = get_semantic_network(config, topics)
     weights = [graph[u][v]['weight'] for u, v in graph.edges()]
     node_size = nx.get_node_attributes(graph, 'importance').values()
@@ -29,7 +29,9 @@ def visualize_semantic_netwrok(config, topics, visualize_method="networkx", file
         plt.axis('off')
         plt.show()
     elif visualize_method == "plotly":
-        plotly.visualize(config, graph, node_size, weights, filename, title=title)
+        plotly.visualize(config, graph, node_size)
+    elif visualize_method == "plotly3d":
+        plotly.visualize_3d(config, graph, node_size)
     else:
         raise visualize_method + " not defined for visualize method. use networkx or plotly as visualize_method"
 

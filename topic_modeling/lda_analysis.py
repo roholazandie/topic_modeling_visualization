@@ -1,4 +1,3 @@
-import numpy as np
 from gensim.models import LdaModel
 from data.corpus import CorpusManager
 from visualization import topic_modeling_semantic_network as topic_modeling_semantic_network
@@ -26,8 +25,15 @@ for topic in topic_words:
         print(word)
     print('\n')
 
+
+visualize_method = ""
+if config.dimension == 2:
+    visualize_method = 'plotly'
+elif config.dimension == 3:
+    visualize_method = 'plotly3d'
+else:
+    raise("Wrong dimension, can accept only 2 or 3")
+
 topic_modeling_semantic_network.visualize_semantic_netwrok(config,
                                                            topic_words,
-                                                           visualize_method='plotly',
-                                                           filename=config.out_file_name,
-                                                           title="Latent Dirichlet Analysis")
+                                                           visualize_method=visualize_method)
