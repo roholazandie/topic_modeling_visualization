@@ -13,7 +13,7 @@ lda = LdaModel(corpus=corpus,
                id2word=dictionary,
                num_topics=config.num_topics,
                update_every=1,
-               passes=6,
+               passes=10,
                alpha=config.alpha,
                eta='auto')
 
