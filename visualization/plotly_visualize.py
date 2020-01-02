@@ -2,6 +2,7 @@ from plotly.offline import plot as offpy
 import networkx as nx
 from networkx.drawing.nx_agraph import graphviz_layout
 import plotly.graph_objs as go
+import math
 
 
 def visualize(config, G, node_size):
@@ -37,14 +38,26 @@ def visualize(config, G, node_size):
         y=[],
         text=[],
         mode='markers+text',
-        textfont=dict(family='Calibri (Body)', size=23, color='black'),
+        textfont=dict(family='Calibri (Body)', size=14, color='black'),
         opacity=1,
         # hoverinfo='text',
         marker=go.Marker(
             showscale=True,
             # colorscale options
-            # 'Greys' | 'Greens' | 'Bluered' | 'Hot' | 'Picnic' | 'Portland' |
-            # Jet' | 'RdBu' | 'Blackbody' | 'Earth' | 'Electric' | 'YIOrRd' | 'YIGnBu'
+            # 'aggrnyl', 'agsunset', 'algae', 'amp', 'armyrose', 'balance',
+            #              'blackbody', 'bluered', 'blues', 'blugrn', 'bluyl', 'brbg',
+            #              'brwnyl', 'bugn', 'bupu', 'burg', 'burgyl', 'cividis', 'curl',
+            #              'darkmint', 'deep', 'delta', 'dense', 'earth', 'edge', 'electric',
+            #              'emrld', 'fall', 'geyser', 'gnbu', 'gray', 'greens', 'greys',
+            #              'haline', 'hot', 'hsv', 'ice', 'icefire', 'inferno', 'jet',
+            #              'magenta', 'magma', 'matter', 'mint', 'mrybm', 'mygbm', 'oranges',
+            #              'orrd', 'oryel', 'peach', 'phase', 'picnic', 'pinkyl', 'piyg',
+            #              'plasma', 'plotly3', 'portland', 'prgn', 'pubu', 'pubugn', 'puor',
+            #              'purd', 'purp', 'purples', 'purpor', 'rainbow', 'rdbu', 'rdgy',
+            #              'rdpu', 'rdylbu', 'rdylgn', 'redor', 'reds', 'solar', 'spectral',
+            #              'speed', 'sunset', 'sunsetdark', 'teal', 'tealgrn', 'tealrose',
+            #              'tempo', 'temps', 'thermal', 'tropic', 'turbid', 'twilight',
+            #              'viridis', 'ylgn', 'ylgnbu', 'ylorbr', 'ylorrd'
             colorscale=config.color_scale,
             reversescale=True,
             color=[],
@@ -55,7 +68,7 @@ def visualize(config, G, node_size):
                 xanchor='left',
                 titleside='right'
             ),
-            line=dict(width=2)))
+            line=dict(width=1.7)))
 
     for node in G.nodes():
         x, y = pos[node]
@@ -69,14 +82,14 @@ def visualize(config, G, node_size):
         node_trace['text'] += (inv_map[node],)
 
     for size in node_size:
-        node_trace['marker']['size'] += (size * 20,)
+        node_trace['marker']['size'] += (abs(math.log(size))*10,)
 
     fig = go.Figure(data=[edge_trace, node_trace],
                     layout=go.Layout(
                         title='<br>' + config.title,
-                        titlefont=dict(size=16),
+                        titlefont=dict(size=12),
                         showlegend=False,
-                        width=1500,
+                        width=1400,
                         height=800,
                         hovermode='closest',
                         margin=dict(b=20, l=350, r=5, t=200),
@@ -152,7 +165,7 @@ def visualize_3d(config, G, node_sizes):
         node_trace['marker']['color'] += (len(adjacencies),)
 
     for size in node_sizes:
-        node_trace['marker']['size'] += (size * 20,)
+        node_trace['marker']['size'] += (abs(math.log(size))*10,)
 
 
 
