@@ -4,7 +4,7 @@ from visualization import topic_modeling_semantic_network as topic_modeling_sema
 from configs import LDAConfig
 import numpy as np
 
-config_file = "/Users/shasa/Downloads/topic_modeling_visualization-master/configs/lda_config.json"
+config_file = "/home/rohola/Codes/Python/topic_modeling_visualization-master/configs/lda_config.json"
 config = LDAConfig.from_json_file(config_file)
 
 corpus_manager = CorpusManager()
