@@ -3,7 +3,7 @@ from data.corpus import CorpusManager
 from visualization import topic_modeling_semantic_network as topic_modeling_semantic_network
 from configs import LSIConfig
 
-config_file = "/home/rohola/Codes/Python/topic_modeling_visualization/configs/lsi_config.json"
+config_file = "/Users/shasa/Downloads/topic_modeling_visualization-master/configs/lsi_config.json"
 config = LSIConfig.from_json_file(config_file)
 
 

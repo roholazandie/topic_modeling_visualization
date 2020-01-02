@@ -2,6 +2,8 @@ import matplotlib.pyplot as plt
 import networkx as nx
 from networkx.drawing.nx_agraph import graphviz_layout
 
+
+
 from visualization import plotly_visualize as plotly
 
 
@@ -24,7 +26,7 @@ def visualize_semantic_netwrok(config, topics, visualize_method='plotly'):
                                alpha=1)
         # edges
         nx.draw_networkx_edges(graph, pos, width=weights, alpha=0.5)
-        nx.draw_networkx_labels(graph, pos, font_size=20, font_color='w')
+        nx.draw_networkx_labels(graph, pos, font_size=12, font_color='w')
 
         plt.axis('off')
         plt.show()
